@@ -62,8 +62,92 @@ main {
 }
 
 .button__module {
-  background-color: red;
   display: inline-block;
+  position: relative;
+}
+
+.button__module.maximized {
+  width: 500px;
+}
+
+.button__module--input {
+  height: 69px;
+  position: absolute;
+  right: 0px;
+  padding: unset;
+  border: none;
+  padding-left: 10px;
+  display: none;
+}
+
+.button__module--input.input-blue {
+  background-color: #3282f7;
+}
+
+.button__module--input.input-green {
+  background-color: #68d9a4;
+}
+
+.button__module--input.input-orange {
+  background-color: #ed6454;
+}
+
+.button__module--input.maximized {
+  width: 490px;
+  display: inline-block;
+}
+
+.button__module--input::-webkit-input-placeholder {
+  color: white;
+}
+
+.button__module--input:-ms-input-placeholder {
+  color: white;
+}
+
+.button__module--input::-ms-input-placeholder {
+  color: white;
+}
+
+.button__module--input::placeholder {
+  color: white;
+}
+
+.button__module--list {
+  display: none;
+}
+
+.button__module--list.list-blue {
+  background-color: #3282f7;
+}
+
+.button__module--list.list-green {
+  background-color: #68d9a4;
+}
+
+.button__module--list.list-orange {
+  background-color: #ed6454;
+}
+
+.button__module--list.maximized {
+  position: absolute;
+  width: 500px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-right: 20px;
+}
+
+.button__module--list ul {
+  padding: 0;
+}
+
+.button__module--list li {
+  list-style-type: none;
+  text-align: left;
+  color: #fff;
 }
 
 .recipesWrapper {
@@ -75,8 +159,6 @@ main {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  position: relative;
-  bottom: 50px;
 }
 
 .recipe {

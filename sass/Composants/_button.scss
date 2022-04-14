@@ -25,6 +25,63 @@
 }
 
 .button__module {
-	background-color: red;
 	display: inline-block;
+	position: relative;
+	&.maximized {
+		width: 500px;
+	}
+	&--input {
+		height: 69px;
+		position: absolute;
+		right: 0px;
+		padding: unset;
+		border: none;
+		padding-left: 10px;
+		display: none;
+		&.input-blue {
+			background-color: $color-button-primary;
+		}
+		&.input-green {
+			background-color: $color-button-secondary;
+		}
+		&.input-orange {
+			background-color: $color-button-tertiary;
+		}
+		&.maximized {
+			width: 490px;
+			display: inline-block;
+		}
+		&::placeholder {
+			color: white;
+		}
+	}
+	&--list {
+		display: none;
+		&.list-blue {
+			background-color: $color-button-primary;
+		}
+		&.list-green {
+			background-color: $color-button-secondary;
+		}
+		&.list-orange {
+			background-color: $color-button-tertiary;
+		}
+
+		&.maximized {
+			position: absolute;
+			width: 500px;
+			display: flex;
+			justify-content: space-around;
+			margin-right: 20px;
+		}
+
+		& ul {
+			padding: 0;
+		}
+		& li {
+			list-style-type: none;
+			text-align: left;
+			color: $color-secondary;
+		}
+	}
 }
