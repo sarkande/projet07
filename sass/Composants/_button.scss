@@ -1,0 +1,30 @@
+.btn {
+	width: 170px;
+	height: 69px;
+	border-radius: 5px;
+	color: white;
+
+	font-family: "Lato", sans-serif;
+	font-style: normal;
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 22px;
+	/* identical to box height */
+
+	text-align: center;
+	border: none;
+}
+.btn-blue {
+	background-color: $color-button-primary;
+}
+.btn-green {
+	background-color: $color-button-secondary;
+}
+.btn-orange {
+	background-color: $color-button-tertiary;
+}
+
+.button__module {
+	background-color: red;
+	display: inline-block;
+}
