@@ -45,6 +45,7 @@ main {
   font-size: 18px;
   line-height: 22px;
   /* identical to box height */
+  cursor: pointer;
   text-align: center;
   border: none;
 }
@@ -142,12 +143,25 @@ main {
 
 .button__module--list ul {
   padding: 0;
+  margin-top: 0;
+  right: 38px;
+  position: relative;
+  max-height: 230px;
+  overflow: hidden;
 }
 
 .button__module--list li {
   list-style-type: none;
   text-align: left;
   color: #fff;
+  max-width: 150px;
+  margin-left: 50px;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.button__module--list li:hover {
+  color: black;
 }
 
 .recipesWrapper {
@@ -175,6 +189,8 @@ main {
       -ms-flex-pack: justify;
           justify-content: space-between;
   margin-bottom: 20px;
+  font-family: "Lato";
+  font-style: normal;
 }
 
 .recipe__img {
@@ -187,29 +203,35 @@ main {
 .recipe__title {
   width: 100%;
   margin: unset;
-  margin-left: 20px;
-  font-family: "Lato";
-  font-style: normal;
+  margin-left: 10px;
   font-weight: 400;
   font-size: 18px;
   line-height: 22px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.recipe__title--timer {
+  margin-right: 10px;
 }
 
 .recipe__list {
   margin: unset;
   padding: unset;
-  width: 45%;
+  width: 55%;
   list-style-type: none;
-  margin-left: 20px;
-  font-family: "Lato";
-  font-style: normal;
+  margin-left: 10px;
   font-weight: 700;
   font-size: 12px;
   line-height: 14px;
   max-height: 109px;
-  white-space: nowrap;
-  overflow: hidden;
+  overflow-wrap: break-word;
   text-overflow: ellipsis;
+  max-width: 171px;
 }
 
 .recipe__descr {
@@ -226,6 +248,8 @@ main {
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 0.75em;
+  max-width: 171px;
+  margin-right: 10px;
 }
 
 .search__module {

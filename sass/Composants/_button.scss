@@ -1,87 +1,99 @@
 .btn {
-	width: 170px;
-	height: 69px;
-	border-radius: 5px;
-	color: white;
+   width: 170px;
+   height: 69px;
+   border-radius: 5px;
+   color: white;
 
-	font-family: "Lato", sans-serif;
-	font-style: normal;
-	font-weight: 700;
-	font-size: 18px;
-	line-height: 22px;
-	/* identical to box height */
-
-	text-align: center;
-	border: none;
+   font-family: "Lato", sans-serif;
+   font-style: normal;
+   font-weight: 700;
+   font-size: 18px;
+   line-height: 22px;
+   /* identical to box height */
+   cursor: pointer;
+   text-align: center;
+   border: none;
 }
 .btn-blue {
-	background-color: $color-button-primary;
+   background-color: $color-button-primary;
 }
 .btn-green {
-	background-color: $color-button-secondary;
+   background-color: $color-button-secondary;
 }
 .btn-orange {
-	background-color: $color-button-tertiary;
+   background-color: $color-button-tertiary;
 }
 
 .button__module {
-	display: inline-block;
-	position: relative;
-	&.maximized {
-		width: 500px;
-	}
-	&--input {
-		height: 69px;
-		position: absolute;
-		right: 0px;
-		padding: unset;
-		border: none;
-		padding-left: 10px;
-		display: none;
-		&.input-blue {
-			background-color: $color-button-primary;
-		}
-		&.input-green {
-			background-color: $color-button-secondary;
-		}
-		&.input-orange {
-			background-color: $color-button-tertiary;
-		}
-		&.maximized {
-			width: 490px;
-			display: inline-block;
-		}
-		&::placeholder {
-			color: white;
-		}
-	}
-	&--list {
-		display: none;
-		&.list-blue {
-			background-color: $color-button-primary;
-		}
-		&.list-green {
-			background-color: $color-button-secondary;
-		}
-		&.list-orange {
-			background-color: $color-button-tertiary;
-		}
+   display: inline-block;
+   position: relative;
+   &.maximized {
+      width: 500px;
+   }
+   &--input {
+      height: 69px;
+      position: absolute;
+      right: 0px;
+      padding: unset;
+      border: none;
+      padding-left: 10px;
+      display: none;
+      &.input-blue {
+         background-color: $color-button-primary;
+      }
+      &.input-green {
+         background-color: $color-button-secondary;
+      }
+      &.input-orange {
+         background-color: $color-button-tertiary;
+      }
+      &.maximized {
+         width: 490px;
+         display: inline-block;
+      }
+      &::placeholder {
+         color: white;
+      }
+   }
+   &--list {
+      display: none;
+      &.list-blue {
+         background-color: $color-button-primary;
+      }
+      &.list-green {
+         background-color: $color-button-secondary;
+      }
+      &.list-orange {
+         background-color: $color-button-tertiary;
+      }
 
-		&.maximized {
-			position: absolute;
-			width: 500px;
-			display: flex;
-			justify-content: space-around;
-			margin-right: 20px;
-		}
+      &.maximized {
+         position: absolute;
+         width: 500px;
+         display: flex;
+         justify-content: space-around;
+         margin-right: 20px;
+      }
 
-		& ul {
-			padding: 0;
-		}
-		& li {
-			list-style-type: none;
-			text-align: left;
-			color: $color-secondary;
-		}
-	}
+      & ul {
+         padding: 0;
+         margin-top: 0;
+         right: 38px;
+         position: relative;
+         max-height: 230px;
+         overflow: hidden;
+      }
+      & li {
+         list-style-type: none;
+         text-align: left;
+         color: $color-secondary;
+         max-width: 150px;
+         margin-left: 50px;
+         margin-bottom: 5px;
+         cursor: pointer;
+         &:hover {
+            color: black;
+         }
+      }
+   }
 }
