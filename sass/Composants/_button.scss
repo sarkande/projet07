@@ -18,6 +18,7 @@
       color: white;
       right: 10px;
       top: 25px;
+      cursor: pointer;
    }
 }
 .btn-blue {
@@ -45,6 +46,9 @@
       padding-left: 10px;
       display: none;
       bottom: 0px;
+      border-radius: 5px 5px 0px 0px;
+      color: white;
+
       &.input-blue {
          background-color: $color-button-primary;
       }
@@ -58,10 +62,41 @@
          width: 490px;
          display: inline-block;
       }
+      &.searchingInput {
+         display: inline-block;
+         right: unset;
+      }
       &::placeholder {
          color: white;
       }
    }
+
+   &-list-search {
+      position: absolute;
+      width: 170px;
+      border-radius: 0px 0px 5px 5px;
+      color: white;
+      font-family: "Lato";
+      display: none;
+
+      &.maximized {
+         display: block;
+      }
+
+      ul {
+         margin: 10px;
+         padding: 0px;
+
+         li {
+            list-style-type: none;
+            cursor: pointer;
+            &:hover {
+               color: black;
+            }
+         }
+      }
+   }
+
    &-div {
       i {
          position: absolute;
@@ -70,6 +105,7 @@
          right: 15px;
          color: white;
          display: none;
+         cursor: pointer;
          &.maximized {
             display: block;
          }
@@ -78,6 +114,7 @@
 
    &--list {
       display: none;
+      border-radius: 0px 0px 5px 5px;
       &.list-blue {
          background-color: $color-button-primary;
       }
@@ -94,12 +131,13 @@
          display: flex;
          justify-content: space-around;
          margin-right: 20px;
+         padding-top: 5px;
       }
 
       & ul {
          padding: 0;
          margin-top: 0;
-         right: 38px;
+
          position: relative;
          max-height: 225px;
          overflow: hidden;
@@ -109,10 +147,10 @@
          text-align: left;
          color: $color-secondary;
          max-width: 150px;
-         margin-left: 50px;
+         margin-left: 5px;
          margin-bottom: 5px;
          cursor: pointer;
-         font-size: 18px;
+         font-size: 15px;
          font-family: "lato";
          &:hover {
             color: black;

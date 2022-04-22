@@ -23,7 +23,7 @@ class App {
     }
     //base function, call when we need to display all the photographers
     async main() {
-        var regexChar = new RegExp(/[^A-zÀ-ú ]/);
+        var regexChar = new RegExp(/[^A-zÀ-ú ()']/);
 
         var ingredients =[];
         var tools =[];

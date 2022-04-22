@@ -54,6 +54,7 @@ main {
   color: white;
   right: 10px;
   top: 25px;
+  cursor: pointer;
 }
 
 .btn-blue {
@@ -86,6 +87,8 @@ main {
   padding-left: 10px;
   display: none;
   bottom: 0px;
+  border-radius: 5px 5px 0px 0px;
+  color: white;
 }
 
 .button__module--input.input-blue {
@@ -105,6 +108,11 @@ main {
   display: inline-block;
 }
 
+.button__module--input.searchingInput {
+  display: inline-block;
+  right: unset;
+}
+
 .button__module--input::-webkit-input-placeholder {
   color: white;
 }
@@ -121,6 +129,33 @@ main {
   color: white;
 }
 
+.button__module-list-search {
+  position: absolute;
+  width: 170px;
+  border-radius: 0px 0px 5px 5px;
+  color: white;
+  font-family: "Lato";
+  display: none;
+}
+
+.button__module-list-search.maximized {
+  display: block;
+}
+
+.button__module-list-search ul {
+  margin: 10px;
+  padding: 0px;
+}
+
+.button__module-list-search ul li {
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.button__module-list-search ul li:hover {
+  color: black;
+}
+
 .button__module-div i {
   position: absolute;
   z-index: 3;
@@ -128,6 +163,7 @@ main {
   right: 15px;
   color: white;
   display: none;
+  cursor: pointer;
 }
 
 .button__module-div i.maximized {
@@ -136,6 +172,7 @@ main {
 
 .button__module--list {
   display: none;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .button__module--list.list-blue {
@@ -159,12 +196,12 @@ main {
   -ms-flex-pack: distribute;
       justify-content: space-around;
   margin-right: 20px;
+  padding-top: 5px;
 }
 
 .button__module--list ul {
   padding: 0;
   margin-top: 0;
-  right: 38px;
   position: relative;
   max-height: 225px;
   overflow: hidden;
@@ -175,10 +212,10 @@ main {
   text-align: left;
   color: #fff;
   max-width: 150px;
-  margin-left: 50px;
+  margin-left: 5px;
   margin-bottom: 5px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 15px;
   font-family: "lato";
 }
 

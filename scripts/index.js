@@ -5,7 +5,8 @@ var selection ={
     button: undefined,
     input: undefined,
     list: undefined,
-    chevron: undefined
+    chevron: undefined,
+    search: undefined
 };
 
 document.querySelectorAll(".btn").forEach(element =>{
@@ -42,15 +43,47 @@ document.addEventListener("keydown", (event) => {
         closeButtonModule(selection);
     }
 });
+document.querySelector(".fa-chevron-up").addEventListener("click", ()=>{
+    closeButtonModule(selection);
+});
+
+
+document.querySelector(".button__module--input").addEventListener("input", (e)=>{
+    if(e.target.value.length >2){
+        //search
+        e.target.parentNode.parentNode.classList.remove("maximized");
+        e.target.classList.remove("maximized");
+        e.target.classList.add("searchingInput");
+        e.target.parentNode.parentNode.querySelector(".button__module--list").classList.remove("maximized");
+        selection.search = e.target.parentNode.parentNode.querySelector(".button__module-list-search");
+        selection.search.classList.add("maximized");
+    }
+    else{
+        e.target.parentNode.parentNode.classList.add("maximized");
+        e.target.classList.add("maximized");
+        e.target.classList.remove("searchingInput");
+        e.target.parentNode.parentNode.querySelector(".button__module--list").classList.add("maximized");
+        e.target.parentNode.parentNode.querySelector(".button__module-list-search").classList.remove("maximized");
+        selection.search = undefined;
+    }
+});
+
+
+
 function closeButtonModule(selection){
     if(selection.button != undefined)
         selection.button.classList.remove("maximized");
-    if(selection.input != undefined)
+    if(selection.input != undefined){
         selection.input.classList.remove("maximized");
+        selection.input.classList.remove("searchingInput");
+    }
     if(selection.list != undefined)
         selection.list.classList.remove("maximized");
     if(selection.chevron != undefined)
         selection.chevron.classList.remove("maximized");
+
+    if(selection.search != undefined)
+        selection.search.classList.remove("maximized"); 
 }
 
 // eslint-disable-next-line no-undef
