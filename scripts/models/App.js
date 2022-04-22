@@ -31,8 +31,7 @@ class App {
         this._recipesData.map(recipe => new Recipe(recipe))
             .forEach(e => {
                 this._$wrapperRecipes.append(new RecipeCard(e).createTemplate());
-                e.ingredients.forEach(element=>{
-                    
+                e.ingredients.forEach(element=>{                 
                     ingredients.push(element.ingredient.toLowerCase().replace(regexChar, ""));
                 });
                 e.ustensils.forEach(element=>{

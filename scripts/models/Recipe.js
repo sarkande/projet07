@@ -19,36 +19,45 @@ class Recipe{
             this._ustensils.push(new Ustensil(element));
         });
     }    
+    toString(){
+        var r = [];
+        r.push(this._appliance);
+
+        this._ingredients.forEach((e)=>{
+            r.push( e.ingredient);
+        });
+        this._ustensils.forEach((e)=>{
+            r.push( e.name);
+        });
+
+        return r;
+    }
+
 
     get id(){
         return this._id;
     }
-
     get name(){
         return this._name;
     }
-
     get servings(){
         return this._servings;
     }
-
     get ingredients(){
         return this._ingredients;
     }
-
     get time(){
         return this._time;
     }
-
     get description(){
         return this._description;
     }
-
     get appliance(){
         return this._appliance;
     }
-
     get ustensils(){
         return this._ustensils;
     }
+
+
 }

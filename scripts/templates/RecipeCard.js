@@ -8,6 +8,9 @@ class RecipeCard{
         $wrapper.classList.add("recipe");
 
         var ingredientsList = "";
+        var tags ="";
+        this._recipe.toString().forEach(element => tags+="<span class='tag'>"+element+"</span>");
+
         for (let index = 0; index < this._recipe.ingredients.length; index++) {
             const element = this._recipe.ingredients[index];
             ingredientsList+="<li class='recipe__list--element'>";
@@ -31,6 +34,7 @@ class RecipeCard{
             <p class="recipe__descr">
             ${this._recipe.description}
             </p>
+            <div class="tags">${tags}</div>
         </div>
         `;
         $wrapper.innerHTML = recipeCard;
