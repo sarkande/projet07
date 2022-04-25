@@ -1,8 +1,11 @@
 /* eslint-disable no-undef */
 // eslint-disable-next-line no-unused-vars
 class App {
-     
     constructor(){
+        this.__ingredient = "ingredient";
+        this.__tool = "tool";
+        this.__ustensil = "ustensil";
+
         this._$wrapperRecipes = document.querySelector(".recipesWrapper");
         //ingredients
         this._$wrapperIngredientsFirst = document.querySelectorAll(".button__module--list")[0].querySelectorAll("ul")[0];
@@ -46,30 +49,61 @@ class App {
         // construction  of list
 
 
-        this.buildList(ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ]);
-        this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ]);
-        this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ]);
-
+        this.buildList(ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
+        this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
+        this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
+        this.addEventBuildList();
     }
 
-    buildList(array, wrapperArray){
+    buildList(array, wrapperArray, type){
         var repartition =1;
         array.forEach(e=>{
             switch(repartition){
             case 1:
-                wrapperArray[0].innerHTML += (`<li>${e}</li>`);
+                wrapperArray[0].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
                 repartition =2;
                 break;
             case 2:
-                wrapperArray[1].innerHTML += (`<li>${e}</li>`);
+                wrapperArray[1].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
                 repartition=3;
                 break;
             case 3:
-                wrapperArray[2].innerHTML += (`<li>${e}</li>`);
+                wrapperArray[2].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
                 repartition=1;
                 break;
             }
         
+        });
+    }
+    addEventBuildList(){
+        document.querySelectorAll(".search__tags-add").forEach((e)=>{
+            e.addEventListener("click", (element)=>{
+                var className="";
+                if(element.target.classList.contains(this.__ingredient))
+                    className="search-ingredient";
+                else if (element.target.classList.contains(this.__tool))
+                    className="search-device";
+                else if (element.target.classList.contains(this.__ustensil))
+                    className="search-tools";
+                else
+                    throw "error";
+
+                var div = document.createElement("div");
+                div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
+                div.classList.add("search__tags--element");
+                div.classList.add(className);
+
+
+                document.querySelector(".search__tags").append(div);
+
+                document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
+                    e.addEventListener("click", (el)=>{
+                        console.log("coucou");
+                        el.target.parentNode.remove();
+                    });
+                });
+
+            });
         });
     }
 }

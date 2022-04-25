@@ -1,54 +1,57 @@
 .search__module {
-	position: relative;
-	&--btn {
-		background-color: $background-primary;
-		height: 69px;
-		border-radius: 5px;
-		border: none;
-		position: absolute;
-		bottom: 1px;
-		left: calc(100% - 30px);
-	}
-	&--input {
-		width: calc(100% - 10px);
-		height: 69px;
-		background-color: $background-primary;
-		border-radius: 5px;
-		padding-left: 10px;
-		border: none;
-	}
+   position: relative;
+   &--btn {
+      background-color: $background-primary;
+      height: 69px;
+      border-radius: 5px;
+      border: none;
+      position: absolute;
+      bottom: 1px;
+      left: calc(100% - 30px);
+   }
+   &--input {
+      width: calc(100% - 10px);
+      height: 69px;
+      background-color: $background-primary;
+      border-radius: 5px;
+      padding-left: 10px;
+      border: none;
+   }
 }
 
 .search__tags {
-	&--element {
-		display: inline-block;
-		min-width: 107px;
-		height: 37px;
-		border-radius: 5px;
-		text-align: center;
-		line-height: 37px;
-		margin-bottom: 10px;
-		color: $color-secondary;
+   &--element {
+      display: inline-block;
+      min-width: 107px;
+      height: 37px;
+      border-radius: 5px;
+      text-align: center;
+      line-height: 37px;
+      margin-bottom: 10px;
+      margin-right: 10px;
+      color: $color-secondary;
+      padding-left: 5px;
+      padding-right: 5px;
 
-		font-family: "Lato";
-		font-style: normal;
-		font-weight: 700;
-		font-size: 14px;
-		& > i {
-			top: 1px;
-			position: relative;
-			margin-left: 5px;
-			cursor: pointer;
-		}
-	}
+      font-family: "Lato";
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      & > i {
+         top: 1px;
+         position: relative;
+         margin-left: 5px;
+         cursor: pointer;
+      }
+   }
 }
 
 .search-ingredient {
-	background-color: $color-button-primary;
+   background-color: $color-button-primary;
 }
 .search-device {
-	background-color: $color-button-secondary;
+   background-color: $color-button-secondary;
 }
 .search-tools {
-	background-color: $color-button-tertiary;
+   background-color: $color-button-tertiary;
 }
