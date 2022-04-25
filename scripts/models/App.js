@@ -53,6 +53,8 @@ class App {
         this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
         this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
         this.addEventBuildList();
+
+
     }
 
     buildList(array, wrapperArray, type){
@@ -98,7 +100,6 @@ class App {
 
                 document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
                     e.addEventListener("click", (el)=>{
-                        console.log("coucou");
                         el.target.parentNode.remove();
                     });
                 });

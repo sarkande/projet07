@@ -131,7 +131,7 @@ main {
 
 .button__module-list-search {
   position: absolute;
-  width: 170px;
+  width: 173px;
   border-radius: 0px 0px 5px 5px;
   color: white;
   font-family: "Lato";
@@ -313,6 +313,7 @@ main {
 
 .search__module {
   position: relative;
+  margin-bottom: 15px;
 }
 
 .search__module--btn {

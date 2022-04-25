@@ -8,7 +8,9 @@ var selection ={
     chevron: undefined,
     search: undefined
 };
-
+const INGREDIENT = "ingredient";
+const DEVICE = "device";
+const TOOLS = "tool";
 document.querySelectorAll(".btn").forEach(element =>{
     element.addEventListener("click", (e) => {
         closeButtonModule(selection);
@@ -48,27 +50,80 @@ document.querySelector(".fa-chevron-up").addEventListener("click", ()=>{
 });
 
 
-document.querySelector(".button__module--input").addEventListener("input", (e)=>{
-    if(e.target.value.length >2){
-        //search
-        e.target.parentNode.parentNode.classList.remove("maximized");
-        e.target.classList.remove("maximized");
-        e.target.classList.add("searchingInput");
-        e.target.parentNode.parentNode.querySelector(".button__module--list").classList.remove("maximized");
-        selection.search = e.target.parentNode.parentNode.querySelector(".button__module-list-search");
-        selection.search.classList.add("maximized");
-    }
-    else{
-        e.target.parentNode.parentNode.classList.add("maximized");
-        e.target.classList.add("maximized");
-        e.target.classList.remove("searchingInput");
-        e.target.parentNode.parentNode.querySelector(".button__module--list").classList.add("maximized");
-        e.target.parentNode.parentNode.querySelector(".button__module-list-search").classList.remove("maximized");
-        selection.search = undefined;
-    }
+document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
+    selected.addEventListener("input", (e)=>{
+        console.log(index);
+        if(e.target.value.length >2){
+            //search
+            e.target.parentNode.parentNode.classList.remove("maximized");
+            e.target.classList.remove("maximized");
+            e.target.classList.add("searchingInput");
+            e.target.parentNode.parentNode.querySelector(".button__module--list").classList.remove("maximized");
+            selection.search = e.target.parentNode.parentNode.querySelector(".button__module-list-search");
+            selection.search.classList.add("maximized");
+
+
+            //search treatment
+            var li = e.target.parentNode.parentNode.querySelectorAll(".button__module--list>ul>li");
+            var $wrapperListSearch = e.target.parentNode.parentNode.querySelector(".button__module-list-search > ul");
+            $wrapperListSearch.innerHTML="";
+            li.forEach((element)=>{
+                console.log(element.innerText);
+                var type = index === 0 ?"ingredient": index === 1 ? "device":"tool";
+                if(element.innerText.includes(e.target.value)){
+                    $wrapperListSearch.innerHTML+="<li class='search__tags-add "+type+"'>"+element.innerHTML+"</li>";
+                }else{
+                    console.log(element.innerText + " not include " + e.target.value);
+                }
+                    
+            });
+            addEventOnSearch();
+            if($wrapperListSearch.innerHTML === ""){
+                $wrapperListSearch.append("Aucun resultat");
+            }
+            
+        }
+        else{
+            e.target.parentNode.parentNode.classList.add("maximized");
+            e.target.classList.add("maximized");
+            e.target.classList.remove("searchingInput");
+            e.target.parentNode.parentNode.querySelector(".button__module--list").classList.add("maximized");
+            e.target.parentNode.parentNode.querySelector(".button__module-list-search").classList.remove("maximized");
+            selection.search = undefined;
+        }
+    });
+
 });
+function addEventOnSearch(){
+    document.querySelectorAll(".search__tags-add").forEach((e)=>{
+        e.addEventListener("click", (element)=>{
+            var className="";
+            if(element.target.classList.contains(INGREDIENT))
+                className="search-ingredient";
+            else if (element.target.classList.contains(DEVICE))
+                className="search-device";
+            else if (element.target.classList.contains(TOOLS))
+                className="search-tools";
+            else
+                throw "error";
+
+            var div = document.createElement("div");
+            div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
+            div.classList.add("search__tags--element");
+            div.classList.add(className);
 
 
+            document.querySelector(".search__tags").append(div);
+
+            document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
+                e.addEventListener("click", (el)=>{
+                    el.target.parentNode.remove();
+                });
+            });
+
+        });
+    });
+}
 
 function closeButtonModule(selection){
     if(selection.button != undefined)
