@@ -97,22 +97,32 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
 
 document.querySelector(".search__module--input").addEventListener("keydown", (event)=>{
     if (event.key === "Enter") {
-        //  searchByInput();
+        searchByInput();
     }
+});
+document.querySelector(".search__module--input").addEventListener("input", ()=>{
+    searchByInput();
 });
 
 
 
-// //sort recips using input
-// function searchByInput(){
-//     throw "error";
-// }
+//sort recips using input
+function searchByInput(){
+    var recipes = document.querySelectorAll(".recipe__title--name");
 
+    recipes.forEach((element)=>{
+        var valueInput = document.querySelector(".search__module--input").value;
+        element.parentElement.parentElement.style.display = "";
 
+        if(!element.innerText.toUpperCase().includes(valueInput.toUpperCase()))
+            element.parentElement.parentElement.style.display = "none";
+    });
+}
 // //sort recipes usings tags
 // function searchByTags(){
 //     throw "error";
 // }
+
 
 
 
