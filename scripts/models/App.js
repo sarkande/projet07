@@ -97,14 +97,36 @@ class App {
 
 
                 document.querySelector(".search__tags").append(div);
-
+                searchByTags();
                 document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
                     e.addEventListener("click", (el)=>{
                         el.target.parentNode.remove();
+                        searchByTags();
                     });
                 });
 
             });
         });
     }
+    searchByTags(){
+        console.log("search by tag");
+        var tagsSearch = document.querySelectorAll(".search__tags--element");
+    
+        document.querySelectorAll(".tags").forEach((tags, index)=>{
+            let arrayTags=[];
+            tagsSearch.forEach(element => {
+                if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
+                    arrayTags.push(true);
+                else
+                    arrayTags.push(false);
+            });
+            console.log(index, arrayTags);
+            console.log(tags.parentElement);
+            if(arrayTags.includes(false))
+                tags.parentElement.style.display = "none";
+            else
+                tags.parentElement.style.display = "";
+        });
+    }
 }
+

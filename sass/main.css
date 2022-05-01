@@ -309,6 +309,10 @@ main {
   margin-right: 10px;
 }
 
+.tags {
+  display: none;
+}
+
 .search__module {
   position: relative;
   margin-bottom: 15px;

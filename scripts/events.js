@@ -52,7 +52,6 @@ document.querySelector(".fa-chevron-up").addEventListener("click", ()=>{
 
 document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
     selected.addEventListener("input", (e)=>{
-        console.log(index);
         if(e.target.value.length >2){
             //search
             e.target.parentNode.parentNode.classList.remove("maximized");
@@ -68,14 +67,9 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
             var $wrapperListSearch = e.target.parentNode.parentNode.querySelector(".button__module-list-search > ul");
             $wrapperListSearch.innerHTML="";
             li.forEach((element)=>{
-                console.log(element.innerText);
                 var type = index === 0 ?"ingredient": index === 1 ? "device":"tool";
-                if(element.innerText.includes(e.target.value)){
+                if(element.innerText.includes(e.target.value))
                     $wrapperListSearch.innerHTML+="<li class='search__tags-add "+type+"'>"+element.innerHTML+"</li>";
-                }else{
-                    console.log(element.innerText + " not include " + e.target.value);
-                }
-                    
             });
             addEventOnSearch();
             if($wrapperListSearch.innerHTML === ""){
@@ -95,11 +89,6 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
 
 });
 
-document.querySelector(".search__module--input").addEventListener("keydown", (event)=>{
-    if (event.key === "Enter") {
-        searchByInput();
-    }
-});
 document.querySelector(".search__module--input").addEventListener("input", ()=>{
     searchByInput();
 });
@@ -118,13 +107,27 @@ function searchByInput(){
             element.parentElement.parentElement.style.display = "none";
     });
 }
-// //sort recipes usings tags
-// function searchByTags(){
-//     throw "error";
-// }
 
+function searchByTags(){
+    console.log("search by tag");
+    var tagsSearch = document.querySelectorAll(".search__tags--element");
 
-
+    document.querySelectorAll(".tags").forEach((tags, index)=>{
+        let arrayTags=[];
+        tagsSearch.forEach(element => {
+            if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
+                arrayTags.push(true);
+            else
+                arrayTags.push(false);
+        });
+        console.log(index, arrayTags);
+        console.log(tags.parentElement);
+        if(arrayTags.includes(false))
+            tags.parentElement.style.display = "none";
+        else
+            tags.parentElement.style.display = "";
+    });
+}
 
 function addEventOnSearch(){
     document.querySelectorAll(".search__tags-add").forEach((e)=>{
@@ -146,10 +149,11 @@ function addEventOnSearch(){
 
 
             document.querySelector(".search__tags").append(div);
-
+            searchByTags();
             document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
                 e.addEventListener("click", (el)=>{
                     el.target.parentNode.remove();
+                    searchByTags();
                 });
             });
 
