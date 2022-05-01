@@ -25,7 +25,7 @@ class RecipeCard{
         const recipeCard =`
         <div class="recipe__img"></div>
             <h2 class="recipe__title">
-                ${this._recipe.name}
+                <span class="recipe__title--name">${this._recipe.name}</span>
                 <span class="recipe__title--timer"><i class="fa-regular fa-clock"></i> ${this._recipe.time} min</span>
             </h2>
             <ul class="recipe__list">
