@@ -1,7 +1,6 @@
 .recipesWrapper {
    display: flex;
    flex-wrap: wrap;
-   justify-content: space-between;
 }
 .recipe {
    width: 380px;
@@ -13,6 +12,7 @@
    justify-content: space-between;
 
    margin-bottom: 20px;
+   margin-right: 10px;
    font-family: "Lato";
    font-style: normal;
 
