@@ -123,10 +123,55 @@ class App {
             console.log(index, arrayTags);
             console.log(tags.parentElement);
             if(arrayTags.includes(false))
-                tags.parentElement.style.display = "none";
+                tags.parentElement.classList.add("tagged");
             else
-                tags.parentElement.style.display = "";
+                tags.parentElement.classList.remove("tagged");
         });
+        hideNotSearched();
+    }
+
+    
+    hideNotSearched(){
+        var tagged = document.querySelectorAll(".tagged");
+        var searched = document.querySelectorAll(".searched");
+        var search__tags = document.querySelectorAll(".search__tags--element");
+
+        console.log(search__tags.length);
+        if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
+            //double recherche
+            console.log("double recherche");
+            document.querySelectorAll(".recipe").forEach((element)=>{
+                element.style.display = "none";
+                if(element.classList.contains("tagged") && element.classList.contains("searched"))
+                    element.style.display = "";
+            });
+        }
+        else if(tagged.length > 0 && searched.length === 0){
+            //display only tagged
+            console.log("tagged");
+            document.querySelectorAll(".recipe").forEach((element)=>{
+                element.style.display = "none";
+                if(element.classList.contains("tagged"))
+                    element.style.display = "";
+            });
+        }
+        else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0)){
+            //display only searched
+            console.log("searched");
+            document.querySelectorAll(".recipe").forEach((element)=>{
+                element.style.display = "none";
+                if(element.classList.contains("searched") && search__tags.length === 0)
+                    element.style.display = "";
+            });
+        }
+        else{
+            //display all
+            console.log("all");
+            document.querySelectorAll(".recipe").forEach((element)=>{         
+                element.style.display = "";
+            });
+        }
+    
     }
 }
 
