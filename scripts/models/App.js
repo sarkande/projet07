@@ -97,11 +97,11 @@ class App {
 
 
                 document.querySelector(".search__tags").append(div);
-                searchByTags();
+                this.searchByTags();
                 document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
                     e.addEventListener("click", (el)=>{
                         el.target.parentNode.remove();
-                        searchByTags();
+                        this.searchByTags();
                     });
                 });
 
@@ -122,31 +122,67 @@ class App {
             });
             console.log(index, arrayTags);
             console.log(tags.parentElement);
-            if(arrayTags.includes(false))
+            if(!arrayTags.includes(false))
                 tags.parentElement.classList.add("tagged");
             else
                 tags.parentElement.classList.remove("tagged");
         });
-        hideNotSearched();
+        this.hideNotSearched();
     }
 
+    searchByInput(size){
+        var recipes = document.querySelectorAll(".recipe__title--name");
     
+        recipes.forEach((element)=>{
+            var valueInput = document.querySelector(".search__module--input").value;
+            element.parentElement.parentElement.style.display = "";
+    
+            if(element.innerText.toUpperCase().includes(valueInput.toUpperCase()) && size>0)
+                element.parentElement.parentElement.classList.add("searched");
+            else
+                element.parentElement.parentElement.classList.remove("searched");
+        });
+        this.hideNotSearched();
+    }
+
+    addEventOnSearch(){
+        document.querySelectorAll(".search__tags-add").forEach((e)=>{
+            e.addEventListener("click", (element)=>{
+                var className="";
+                if(element.target.classList.contains(this.__ingredient))
+                    className="search-ingredient";
+                else if (element.target.classList.contains(this.__ustensil))
+                    className="search-device";
+                else if (element.target.classList.contains(this.__tool))
+                    className="search-tools";
+                else
+                    throw "error";
+    
+                var div = document.createElement("div");
+                div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
+                div.classList.add("search__tags--element");
+                div.classList.add(className);
+    
+    
+                document.querySelector(".search__tags").append(div);
+                this.searchByTags();
+                document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
+                    e.addEventListener("click", (el)=>{
+                        el.target.parentNode.remove();
+                        this.searchByTags();
+                    });
+                });
+    
+            });
+        });
+    }
     hideNotSearched(){
         var tagged = document.querySelectorAll(".tagged");
         var searched = document.querySelectorAll(".searched");
         var search__tags = document.querySelectorAll(".search__tags--element");
 
         console.log(search__tags.length);
-        if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
-            //double recherche
-            console.log("double recherche");
-            document.querySelectorAll(".recipe").forEach((element)=>{
-                element.style.display = "none";
-                if(element.classList.contains("tagged") && element.classList.contains("searched"))
-                    element.style.display = "";
-            });
-        }
-        else if(tagged.length > 0 && searched.length === 0){
+        if(tagged.length > 0 && searched.length === 0){
             //display only tagged
             console.log("tagged");
             document.querySelectorAll(".recipe").forEach((element)=>{
@@ -164,6 +200,15 @@ class App {
                     element.style.display = "";
             });
         }
+        else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
+            //double recherche
+            console.log("double recherche");
+            document.querySelectorAll(".recipe").forEach((element)=>{
+                element.style.display = "none";
+                if(element.classList.contains("tagged") && element.classList.contains("searched"))
+                    element.style.display = "";
+            });
+        }
         else{
             //display all
             console.log("all");
@@ -173,5 +218,7 @@ class App {
         }
     
     }
+   
+    
 }
 
