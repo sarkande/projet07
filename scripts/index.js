@@ -3,7 +3,6 @@
 var app = new App();
 app.main();
 
-
 document.querySelector(".search__module--input").addEventListener("input", (e)=>{
     app.searchByInput(e.target.value.length);
     app.removeMaximizedClass();
@@ -27,21 +26,17 @@ document.querySelectorAll(".btn").forEach(element =>{
         if(selection.button != undefined)
             selection.button .classList.add("maximized");
 
-
         selection.input  = e.target.parentNode.querySelector(".button__module--input");
         if(selection.input != undefined)
             selection.input.classList.add("maximized");
-
 
         selection.list = e.target.parentNode.querySelector(".button__module--list");
         if(selection.list != undefined)
             selection.list.classList.add("maximized");
 
-
         selection.chevron = e.target.parentNode.querySelector(".fa-chevron-up");
         if(selection.chevron != undefined)
             selection.chevron.classList.add("maximized");
-
         
     });
 });
@@ -58,7 +53,6 @@ document.querySelector(".fa-chevron-up").addEventListener("click", ()=>{
     app.removeMaximizedClass();
 });
 
-
 document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
     selected.addEventListener("input", (e)=>{
         if(e.target.value.length >2){
@@ -69,7 +63,6 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
             e.target.parentNode.parentNode.querySelector(".button__module--list").classList.remove("maximized");
             selection.search = e.target.parentNode.parentNode.querySelector(".button__module-list-search");
             selection.search.classList.add("maximized");
-
 
             //search treatment
             var li = e.target.parentNode.parentNode.querySelectorAll(".button__module--list>ul>li");

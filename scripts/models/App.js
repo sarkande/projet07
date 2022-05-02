@@ -47,8 +47,6 @@ class App {
         tools = new Set(tools);
         ustensils = new Set(ustensils);
         // construction  of list
-
-
         this.buildList(ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
         this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
         this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
@@ -89,8 +87,7 @@ class App {
                 else
                     arrayTags.push(false);
             });
-            // console.log(index, arrayTags);
-            // console.log(tags.parentElement);
+
             if(!arrayTags.includes(false))
                 tags.parentElement.classList.add("tagged");
             else
@@ -119,7 +116,6 @@ class App {
             e.addEventListener("click", (element)=>{
                 var alreadyUsed=false;
                 document.querySelectorAll(".search__tags--element").forEach((e)=>{
-                    console.log("search__tags--element",e.innerText);
                     if(e.innerText.toLowerCase().trim() === element.target.innerText.toLowerCase().trim())
                         alreadyUsed=true;
                 });
@@ -158,10 +154,8 @@ class App {
         var searched = document.querySelectorAll(".searched");
         var search__tags = document.querySelectorAll(".search__tags--element");
 
-        console.log(search__tags.length);
         if(tagged.length > 0 && searched.length === 0){
             //display only tagged
-            console.log("tagged");
             document.querySelectorAll(".recipe").forEach((element)=>{
                 element.style.display = "none";
                 if(element.classList.contains("tagged"))
@@ -170,7 +164,6 @@ class App {
         }
         else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0)){
             //display only searched
-            console.log("searched");
             document.querySelectorAll(".recipe").forEach((element)=>{
                 element.style.display = "none";
                 if(element.classList.contains("searched") && search__tags.length === 0)
@@ -179,7 +172,6 @@ class App {
         }
         else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
             //double recherche
-            console.log("double recherche");
             document.querySelectorAll(".recipe").forEach((element)=>{
                 element.style.display = "none";
                 if(element.classList.contains("tagged") && element.classList.contains("searched"))
@@ -188,7 +180,6 @@ class App {
         }
         else{
             //display all
-            console.log("all");
             document.querySelectorAll(".recipe").forEach((element)=>{         
                 element.style.display = "";
             });
