@@ -52,7 +52,7 @@ class App {
         this.buildList(ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
         this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
         this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
-        this.addEventBuildList();
+        this.addEventOnTagsSearch();
 
 
     }
@@ -77,42 +77,11 @@ class App {
         
         });
     }
-    addEventBuildList(){
-        document.querySelectorAll(".search__tags-add").forEach((e)=>{
-            e.addEventListener("click", (element)=>{
-                var className="";
-                if(element.target.classList.contains(this.__ingredient))
-                    className="search-ingredient";
-                else if (element.target.classList.contains(this.__tool))
-                    className="search-device";
-                else if (element.target.classList.contains(this.__ustensil))
-                    className="search-tools";
-                else
-                    throw "error";
-
-                var div = document.createElement("div");
-                div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
-                div.classList.add("search__tags--element");
-                div.classList.add(className);
-
-
-                document.querySelector(".search__tags").append(div);
-                this.searchByTags();
-                document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
-                    e.addEventListener("click", (el)=>{
-                        el.target.parentNode.remove();
-                        this.searchByTags();
-                    });
-                });
-
-            });
-        });
-    }
     searchByTags(){
         console.log("search by tag");
         var tagsSearch = document.querySelectorAll(".search__tags--element");
     
-        document.querySelectorAll(".tags").forEach((tags, index)=>{
+        document.querySelectorAll(".tags").forEach((tags)=>{
             let arrayTags=[];
             tagsSearch.forEach(element => {
                 if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
@@ -120,8 +89,8 @@ class App {
                 else
                     arrayTags.push(false);
             });
-            console.log(index, arrayTags);
-            console.log(tags.parentElement);
+            // console.log(index, arrayTags);
+            // console.log(tags.parentElement);
             if(!arrayTags.includes(false))
                 tags.parentElement.classList.add("tagged");
             else
@@ -145,34 +114,42 @@ class App {
         this.hideNotSearched();
     }
 
-    addEventOnSearch(){
+    addEventOnTagsSearch(){
         document.querySelectorAll(".search__tags-add").forEach((e)=>{
             e.addEventListener("click", (element)=>{
-                var className="";
-                if(element.target.classList.contains(this.__ingredient))
-                    className="search-ingredient";
-                else if (element.target.classList.contains(this.__ustensil))
-                    className="search-device";
-                else if (element.target.classList.contains(this.__tool))
-                    className="search-tools";
-                else
-                    throw "error";
-    
-                var div = document.createElement("div");
-                div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
-                div.classList.add("search__tags--element");
-                div.classList.add(className);
-    
-    
-                document.querySelector(".search__tags").append(div);
-                this.searchByTags();
-                document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
-                    e.addEventListener("click", (el)=>{
-                        el.target.parentNode.remove();
-                        this.searchByTags();
-                    });
+                var alreadyUsed=false;
+                document.querySelectorAll(".search__tags--element").forEach((e)=>{
+                    console.log("search__tags--element",e.innerText);
+                    if(e.innerText.toLowerCase().trim() === element.target.innerText.toLowerCase().trim())
+                        alreadyUsed=true;
                 });
-    
+
+                if(!alreadyUsed){
+                    var className="";
+                    if(element.target.classList.contains(this.__ingredient))
+                        className="search-ingredient";
+                    else if (element.target.classList.contains(this.__ustensil))
+                        className="search-device";
+                    else if (element.target.classList.contains(this.__tool))
+                        className="search-tools";
+                    else
+                        throw "error";
+        
+                    var div = document.createElement("div");
+                    div.innerHTML=element.target.innerHTML + "<i class='fa-regular fa-circle-xmark'></i>";
+                    div.classList.add("search__tags--element");
+                    div.classList.add(className);
+                    document.querySelector(".search__tags").append(div);
+
+                    this.removeMaximizedClass();
+                    this.searchByTags();
+                    document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
+                        e.addEventListener("click", (el)=>{
+                            el.target.parentNode.remove();
+                            this.searchByTags();
+                        });
+                    });
+                }
             });
         });
     }
@@ -218,7 +195,15 @@ class App {
         }
     
     }
-   
+    removeMaximizedClass(){
+        document.querySelectorAll(".maximized").forEach((selected)=>{
+            selected.classList.remove("maximized");
+        });
+    
+        document.querySelectorAll(".searchingInput").forEach((selected)=>{
+            selected.classList.remove("searchingInput");
+        });
+    }
     
 }
 

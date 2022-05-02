@@ -6,6 +6,10 @@ app.main();
 
 document.querySelector(".search__module--input").addEventListener("input", (e)=>{
     app.searchByInput(e.target.value.length);
+    app.removeMaximizedClass();
+});
+document.querySelector(".search__module--input").addEventListener("click", ()=>{
+    app.removeMaximizedClass();
 });
 
 var selection ={
@@ -18,7 +22,7 @@ var selection ={
 
 document.querySelectorAll(".btn").forEach(element =>{
     element.addEventListener("click", (e) => {
-        closeButtonModule(selection);
+        app.removeMaximizedClass();
         selection.button = e.target.parentNode;
         if(selection.button != undefined)
             selection.button .classList.add("maximized");
@@ -42,16 +46,16 @@ document.querySelectorAll(".btn").forEach(element =>{
     });
 });
 document.querySelector(".recipesWrapper").addEventListener("click", () => {
-    closeButtonModule(selection);
+    app.removeMaximizedClass();
 });
 document.addEventListener("keydown", (event) => {
         
     if (event.key === "Escape") {
-        closeButtonModule(selection);
+        app.removeMaximizedClass();
     }
 });
 document.querySelector(".fa-chevron-up").addEventListener("click", ()=>{
-    closeButtonModule(selection);
+    app.removeMaximizedClass();
 });
 
 
@@ -76,7 +80,7 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
                 if(element.innerText.includes(e.target.value))
                     $wrapperListSearch.innerHTML+="<li class='search__tags-add "+type+"'>"+element.innerHTML+"</li>";
             });
-            app.addEventOnSearch();
+            app.addEventOnTagsSearch();
             if($wrapperListSearch.innerHTML === ""){
                 $wrapperListSearch.append("Aucun resultat");
             }
@@ -93,22 +97,3 @@ document.querySelectorAll(".button__module--input").forEach((selected,index)=>{
     });
 
 });
-
-
-function closeButtonModule(selection){
-    if(selection.button != undefined)
-        selection.button.classList.remove("maximized");
-    if(selection.input != undefined){
-        selection.input.classList.remove("maximized");
-        selection.input.classList.remove("searchingInput");
-    }
-    if(selection.list != undefined)
-        selection.list.classList.remove("maximized");
-    if(selection.chevron != undefined)
-        selection.chevron.classList.remove("maximized");
-
-    if(selection.search != undefined)
-        selection.search.classList.remove("maximized"); 
-}
-
-
