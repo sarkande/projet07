@@ -186,6 +186,8 @@ class App {
         }
     
     }
+
+    
     removeMaximizedClass(){
         document.querySelectorAll(".maximized").forEach((selected)=>{
             selected.classList.remove("maximized");
