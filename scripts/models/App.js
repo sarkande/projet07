@@ -96,14 +96,14 @@ class App {
         this.hideNotSearched();
     }
 
-    searchByInput(size){
+    searchByInput(){
         var recipes = document.querySelectorAll(".recipe__title--name");
     
         recipes.forEach((element)=>{
             var valueInput = document.querySelector(".search__module--input").value;
             element.parentElement.parentElement.style.display = "";
     
-            if(element.innerText.toUpperCase().includes(valueInput.toUpperCase()) && size>0)
+            if(element.innerText.toUpperCase().includes(valueInput.toUpperCase()) && valueInput.length>0)
                 element.parentElement.parentElement.classList.add("searched");
             else
                 element.parentElement.parentElement.classList.remove("searched");

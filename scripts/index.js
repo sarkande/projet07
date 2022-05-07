@@ -3,8 +3,8 @@
 var app = new App();
 app.main();
 
-document.querySelector(".search__module--input").addEventListener("input", (e)=>{
-    app.searchByInput(e.target.value.length);
+document.querySelector(".search__module--input").addEventListener("input", ()=>{
+    app.searchByInput();
     app.removeMaximizedClass();
 });
 document.querySelector(".search__module--input").addEventListener("click", ()=>{
