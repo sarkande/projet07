@@ -153,39 +153,31 @@ class App {
         var tagged = document.querySelectorAll(".tagged");
         var searched = document.querySelectorAll(".searched");
         var search__tags = document.querySelectorAll(".search__tags--element");
+        document.querySelectorAll(".recipe").forEach((element)=>{
+            element.style.display = "none";
 
-        if(tagged.length > 0 && searched.length === 0){
-            //display only tagged
-            document.querySelectorAll(".recipe").forEach((element)=>{
-                element.style.display = "none";
+            if(tagged.length > 0 && searched.length === 0){
+                //display only tagged
                 if(element.classList.contains("tagged"))
                     element.style.display = "";
-            });
-        }
-        else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0)){
-            //display only searched
-            document.querySelectorAll(".recipe").forEach((element)=>{
-                element.style.display = "none";
+            }
+            else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0)){
                 if(element.classList.contains("searched") && search__tags.length === 0)
                     element.style.display = "";
-            });
-        }
-        else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
-            //double recherche
-            document.querySelectorAll(".recipe").forEach((element)=>{
-                element.style.display = "none";
+            }
+            else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
                 if(element.classList.contains("tagged") && element.classList.contains("searched"))
                     element.style.display = "";
-            });
-        }
-        else{
-            //display all
-            document.querySelectorAll(".recipe").forEach((element)=>{         
+            }
+            else{
                 element.style.display = "";
-            });
-        }
+            }
+
+        });
     
     }
+
+
 
     
     removeMaximizedClass(){
