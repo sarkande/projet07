@@ -81,9 +81,10 @@ class App {
         var tags= document.querySelectorAll(".tags");
         for(var i=0; i<tags.length; i++){
             let arrayTags=[];
+            const tagsElement = tags[i];
             for (let index = 0; index < tagsSearch.length; index++) {
                 const element = tagsSearch[index];
-                if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
+                if(tagsElement.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
                     arrayTags.push(true);
                 else
                     arrayTags.push(false);
@@ -91,9 +92,9 @@ class App {
 
 
             if(!arrayTags.includes(false))
-                tags.parentElement.classList.add("tagged");
+                tagsElement.parentElement.classList.add("tagged");
             else
-                tags.parentElement.classList.remove("tagged");
+                tagsElement.parentElement.classList.remove("tagged");
         }
         this.hideNotSearched();
     }
