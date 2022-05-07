@@ -78,28 +78,30 @@ class App {
     searchByTags(){
         console.log("search by tag");
         var tagsSearch = document.querySelectorAll(".search__tags--element");
-    
-        document.querySelectorAll(".tags").forEach((tags)=>{
+        var tags= document.querySelectorAll(".tags");
+        for(var i=0; i<tags.length; i++){
             let arrayTags=[];
-            tagsSearch.forEach(element => {
+            for (let index = 0; index < tagsSearch.length; index++) {
+                const element = tagsSearch[index];
                 if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
                     arrayTags.push(true);
                 else
                     arrayTags.push(false);
-            });
+            }
+
 
             if(!arrayTags.includes(false))
                 tags.parentElement.classList.add("tagged");
             else
                 tags.parentElement.classList.remove("tagged");
-        });
+        }
         this.hideNotSearched();
     }
 
     searchByInput(size){
         var recipes = document.querySelectorAll(".recipe__title--name");
-    
-        recipes.forEach((element)=>{
+        for (let index = 0; index < recipes.length; index++) {
+            const element = recipes[index];
             var valueInput = document.querySelector(".search__module--input").value;
             element.parentElement.parentElement.style.display = "";
     
@@ -107,7 +109,8 @@ class App {
                 element.parentElement.parentElement.classList.add("searched");
             else
                 element.parentElement.parentElement.classList.remove("searched");
-        });
+
+        }
         this.hideNotSearched();
     }
 
@@ -115,11 +118,14 @@ class App {
         document.querySelectorAll(".search__tags-add").forEach((e)=>{
             e.addEventListener("click", (element)=>{
                 var alreadyUsed=false;
-                document.querySelectorAll(".search__tags--element").forEach((e)=>{
+                var searchTagsElement = document.querySelectorAll(".search__tags--element");
+
+                for (let index = 0; index < searchTagsElement.length; index++) {
+                    const e = searchTagsElement[index];
                     if(e.innerText.toLowerCase().trim() === element.target.innerText.toLowerCase().trim())
                         alreadyUsed=true;
-                });
-
+                }
+                    
                 if(!alreadyUsed){
                     var className="";
                     if(element.target.classList.contains(this.__ingredient))
@@ -139,12 +145,15 @@ class App {
 
                     this.removeMaximizedClass();
                     this.searchByTags();
-                    document.querySelectorAll(".fa-circle-xmark").forEach((e)=>{
-                        e.addEventListener("click", (el)=>{
-                            el.target.parentNode.remove();
+                    var closeButtons = document.querySelectorAll(".fa-circle-xmark");
+                    for (let index = 0; index < closeButtons.length; index++) {
+                        const element = closeButtons[index];
+                        element.addEventListener("click", (closeButton)=>{
+                            closeButton.target.parentNode.remove();
                             this.searchByTags();
                         });
-                    });
+                    }
+
                 }
             });
         });
