@@ -46,6 +46,7 @@ class App {
 
         this._ingredients = new Set(this._ingredients);
         this._tools = new Set(this._tools);
+        
         this._ustensils = new Set(this._ustensils);
         // construction  of list
         this.constructLists();
@@ -54,14 +55,15 @@ class App {
     }
 
     constructLists(){
-        this.cleanList(this._$wrapperIngredientsFirst, this._$wrapperIngredientsSecond, this._$wrapperIngredientsThird);
+        this.cleanList(document.querySelectorAll(".button__module--list ul"));
         this.buildList(this._ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
         this.buildList(this._tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
         this.buildList(this._ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
         this.addEventOnTagsSearch();
     }
-    cleanList(...args){
+    cleanList(args){
         args.forEach(e => {
+            console.log(e);
             e.innerHTML = "";
         });
     }
@@ -70,7 +72,6 @@ class App {
         var listOfTags = this.filterTags();
 
         array.forEach(e=>{
-            console.log(e);
             if(listOfTags.includes(e.toUpperCase())){
                 switch(repartition){
                 case 1:
@@ -219,9 +220,9 @@ class App {
                     var className="";
                     if(element.target.classList.contains(this.__ingredient))
                         className="search-ingredient";
-                    else if (element.target.classList.contains(this.__ustensil))
-                        className="search-device";
                     else if (element.target.classList.contains(this.__tool))
+                        className="search-device";
+                    else if (element.target.classList.contains(this.__ustensil))
                         className="search-tools";
                     else
                         throw "error";
