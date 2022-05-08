@@ -5,6 +5,9 @@ class App {
         this.__ingredient = "ingredient";
         this.__tool = "tool";
         this.__ustensil = "ustensil";
+        this._ingredients =[];
+        this._tools =[];
+        this._ustensils =[];
 
         this._$wrapperRecipes = document.querySelector(".recipesWrapper");
         //ingredients
@@ -28,52 +31,76 @@ class App {
     async main() {
         var regexChar = new RegExp(/[^A-zÀ-ú ()']/);
 
-        var ingredients =[];
-        var tools =[];
-        var ustensils =[];
+
         this._recipesData.map(recipe => new Recipe(recipe))
             .forEach(e => {
                 this._$wrapperRecipes.append(new RecipeCard(e).createTemplate());
                 e.ingredients.forEach(element=>{                 
-                    ingredients.push(element.ingredient.toLowerCase().replace(regexChar, ""));
+                    this._ingredients.push(element.ingredient.toLowerCase().replace(regexChar, ""));
                 });
                 e.ustensils.forEach(element=>{
-                    ustensils.push(element.name.toLowerCase());
+                    this._ustensils.push(element.name.toLowerCase());
                 });
-                tools.push(e.appliance.toLowerCase());
+                this._tools.push(e.appliance.toLowerCase());
             });
 
-        ingredients = new Set(ingredients);
-        tools = new Set(tools);
-        ustensils = new Set(ustensils);
+        this._ingredients = new Set(this._ingredients);
+        this._tools = new Set(this._tools);
+        this._ustensils = new Set(this._ustensils);
         // construction  of list
-        this.buildList(ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
-        this.buildList(tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
-        this.buildList(ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
-        this.addEventOnTagsSearch();
+        this.constructLists();
 
 
     }
 
+    constructLists(){
+        this.cleanList(this._$wrapperIngredientsFirst, this._$wrapperIngredientsSecond, this._$wrapperIngredientsThird);
+        this.buildList(this._ingredients, [this._$wrapperIngredientsFirst,this._$wrapperIngredientsSecond,this._$wrapperIngredientsThird ], this.__ingredient);
+        this.buildList(this._tools, [this._$wrapperToolsFirst,this._$wrapperToolsSecond,this._$wrapperToolsThird ], this.__tool);
+        this.buildList(this._ustensils, [this._$wrapperUstensilsFirst,this._$wrapperUstensilsSecond,this._$wrapperUstensilsThird ], this.__ustensil);
+        this.addEventOnTagsSearch();
+    }
+    cleanList(...args){
+        args.forEach(e => {
+            e.innerHTML = "";
+        });
+    }
     buildList(array, wrapperArray, type){
         var repartition =1;
+        var listOfTags = this.filterTags();
+
         array.forEach(e=>{
-            switch(repartition){
-            case 1:
-                wrapperArray[0].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
-                repartition =2;
-                break;
-            case 2:
-                wrapperArray[1].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
-                repartition=3;
-                break;
-            case 3:
-                wrapperArray[2].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
-                repartition=1;
-                break;
+            console.log(e);
+            if(listOfTags.includes(e.toUpperCase())){
+                switch(repartition){
+                case 1:
+                    wrapperArray[0].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
+                    repartition =2;
+                    break;
+                case 2:
+                    wrapperArray[1].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
+                    repartition=3;
+                    break;
+                case 3:
+                    wrapperArray[2].innerHTML += (`<li class='search__tags-add ${type}'>${e}</li>`);
+                    repartition=1;
+                    break;
+                }
             }
         
         });
+    }
+    filterTags(){
+        var recipes = document.querySelectorAll(".recipe");
+        var listOfTags = "";
+        recipes.forEach(recipe => {
+            if(recipe.style.display !== "none"){
+                //get tags
+                var tags = recipe.querySelector(".tags").innerHTML;
+                listOfTags += tags.toUpperCase() + ",";
+            }
+        });
+        return listOfTags.slice(0, -1);
     }
     searchByTags(){
         console.log("search by tag");
@@ -176,7 +203,7 @@ class App {
         if(recipeFound > 0){
             $noRecipeWrapper.style.display = "none";
         }
-    
+        this.constructLists();
     }
 
     addEventOnTagsSearch(){
@@ -214,6 +241,7 @@ class App {
                         });
                     });
                 }
+                //  this.filterTags();
             });
         });
     }

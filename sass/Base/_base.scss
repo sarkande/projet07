@@ -1,29 +1,33 @@
 body {
-	display: flex;
-	justify-content: center;
-	max-width: 1370px;
-	flex-wrap: wrap;
-	margin: auto;
+   display: flex;
+   justify-content: center;
+   max-width: 1370px;
+   flex-wrap: wrap;
+   margin: auto;
 }
 header {
-	text-align: center;
-	padding-top: 50px;
-	width: 100%;
-	// .logo {
-	// }
-	h1 {
-		color: $color-primary;
-		font-family: "DM sans";
-		font-weight: 700;
-		font-size: 36px;
-		line-height: 47px;
-	}
+   text-align: center;
+   padding-top: 50px;
+   width: 100%;
+   // .logo {
+   // }
+   h1 {
+      color: $color-primary;
+      font-family: "DM sans";
+      font-weight: 700;
+      font-size: 36px;
+      line-height: 47px;
+   }
 }
 main {
-	margin: 100px;
-	width: 100%;
+   margin: 100px;
+   width: 100%;
 }
 
 .search-wrapper {
-	margin-bottom: 15px;
+   margin-bottom: 15px;
+}
+
+.hidden {
+   display: none;
 }

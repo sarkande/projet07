@@ -34,6 +34,10 @@ main {
   margin-bottom: 15px;
 }
 
+.hidden {
+  display: none;
+}
+
 .btn {
   width: 170px;
   height: 69px;
