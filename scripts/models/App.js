@@ -99,17 +99,28 @@ class App {
         this.hideNotSearched();
     }
 
-    searchByInput(size){
-        var recipes = document.querySelectorAll(".recipe__title--name");
+    searchByInput(){
+        var recipes = document.querySelectorAll(".recipe");
+        var valueInput = document.querySelector(".search__module--input").value;
+
         for (let index = 0; index < recipes.length; index++) {
             const element = recipes[index];
-            var valueInput = document.querySelector(".search__module--input").value;
-            element.parentElement.parentElement.style.display = "";
+            var title = element.querySelector(".recipe__title--name").innerText;
+            var descr = element.querySelector(".recipe__descr").innerText;
+            var liText = "";
+            var li = element.querySelectorAll(".recipe__tags-list li");
+            for (let index = 0; index < li.length; index++) {
+                liText+=array[index].innerText;
+            }
     
-            if(element.innerText.toUpperCase().includes(valueInput.toUpperCase()) && size>0)
-                element.parentElement.parentElement.classList.add("searched");
+            if(
+                (  (title.toUpperCase().includes(valueInput.toUpperCase()))
+                || (descr.toUpperCase().includes(valueInput.toUpperCase()))
+                || (liText.toUpperCase().includes(valueInput.toUpperCase())))
+                && valueInput.length>2)
+                element.classList.add("searched");
             else
-                element.parentElement.parentElement.classList.remove("searched");
+                element.classList.remove("searched");
 
         }
         this.hideNotSearched();
@@ -159,31 +170,54 @@ class App {
             });
         });
     }
+   
     hideNotSearched(){
         var tagged = document.querySelectorAll(".tagged");
         var searched = document.querySelectorAll(".searched");
         var search__tags = document.querySelectorAll(".search__tags--element");
-        document.querySelectorAll(".recipe").forEach((element)=>{
+        var inputLength = document.querySelector(".search__module--input").value.length ;
+        var recipes = document.querySelectorAll(".recipe");
+        var recipeFound=0;
+        var $noRecipeWrapper = document.querySelector(".noRecipeFound");
+        
+        $noRecipeWrapper.style.display = "block";
+        recipes.forEach((element)=>{
             element.style.display = "none";
 
-            if(tagged.length > 0 && searched.length === 0){
+            if((tagged.length > 0 || search__tags.length > 0)&& searched.length === 0 && inputLength < 3){
                 //display only tagged
-                if(element.classList.contains("tagged"))
+                if(element.classList.contains("tagged")){
                     element.style.display = "";
+                    recipeFound++;
+                }
             }
-            else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0)){
+            else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 2){
                 if(element.classList.contains("searched") && search__tags.length === 0)
+                {                 
                     element.style.display = "";
+                    recipeFound++;
+                }     
             }
-            else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0)){
+            else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 2){
                 if(element.classList.contains("tagged") && element.classList.contains("searched"))
+                {
                     element.style.display = "";
+                    recipeFound++;
+                }
             }
             else{
-                element.style.display = "";
+                if(inputLength <3)
+                {
+                    element.style.display = "";
+                    recipeFound++;
+                }
             }
-
         });
+
+        
+        if(recipeFound > 0){
+            $noRecipeWrapper.style.display = "none";
+        }
     
     }
 
