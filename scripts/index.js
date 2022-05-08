@@ -3,7 +3,7 @@
 var app = new App();
 app.main();
 
-document.querySelector(".search__module--input").addEventListener("input", ()=>{
+document.querySelector(".search__module--input").addEventListener("input", (e)=>{
     app.searchByInput();
     app.removeMaximizedClass();
 });

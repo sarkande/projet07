@@ -82,41 +82,101 @@ class App {
         document.querySelectorAll(".tags").forEach((tags)=>{
             let arrayTags=[];
             tagsSearch.forEach(element => {
-                if(tags.innerText.toUpperCase().trim().includes( element.innerText.toUpperCase().trim()) )
+                let arrayTagsTmp=[];
+                tags.innerText.split(",").forEach(e => { // to avoid word with space like pomme===pomme de terre
+                    if(e.toUpperCase().trim() === element.innerText.toUpperCase().trim()) 
+                        arrayTagsTmp.push(true);
+                    else
+                        arrayTagsTmp.push(false);
+                });
+                if(arrayTagsTmp.includes(true))
                     arrayTags.push(true);
                 else
                     arrayTags.push(false);
+                
             });
-
-            if(!arrayTags.includes(false))
-                tags.parentElement.classList.add("tagged");
-            else
+            console.log(arrayTags);
+            if(arrayTags.includes(false))
                 tags.parentElement.classList.remove("tagged");
+            else
+                tags.parentElement.classList.add("tagged");
         });
         this.hideNotSearched();
     }
 
     searchByInput(){
-        var recipes = document.querySelectorAll(".recipe__title--name");
-    
+        var recipes = document.querySelectorAll(".recipe");
+        var valueInput = document.querySelector(".search__module--input").value;
+
         recipes.forEach((element)=>{
-            var valueInput = document.querySelector(".search__module--input").value;
-            element.parentElement.parentElement.style.display = "";
-            var descr = element.parentElement.parentElement.querySelector(".recipe__descr").innerText;
+            var title = element.querySelector(".recipe__title--name").innerText;
+            var descr = element.querySelector(".recipe__descr").innerText;
             var liText = "";
 
-            element.parentElement.parentElement.querySelectorAll(".recipe__list li").forEach(element => liText+=element.innerText);
+            element.querySelectorAll(".recipe__list li").forEach(element => liText+=element.innerText);
 
             if(
-                ((element.innerText.toUpperCase().includes(valueInput.toUpperCase()))
+                (  (title.toUpperCase().includes(valueInput.toUpperCase()))
                 || (descr.toUpperCase().includes(valueInput.toUpperCase()))
                 || (liText.toUpperCase().includes(valueInput.toUpperCase())))
-                 && valueInput.length>0)
-                element.parentElement.parentElement.classList.add("searched");
+                && valueInput.length>2)
+                element.classList.add("searched");
             else
-                element.parentElement.parentElement.classList.remove("searched");
+                element.classList.remove("searched");
         });
+
         this.hideNotSearched();
+    }
+
+
+    hideNotSearched(){
+        var tagged = document.querySelectorAll(".tagged");
+        var searched = document.querySelectorAll(".searched");
+        var search__tags = document.querySelectorAll(".search__tags--element");
+        var inputLength = document.querySelector(".search__module--input").value.length ;
+        var recipes = document.querySelectorAll(".recipe");
+        var recipeFound=0;
+        var $noRecipeWrapper = document.querySelector(".noRecipeFound");
+        
+        $noRecipeWrapper.style.display = "block";
+        recipes.forEach((element)=>{
+            element.style.display = "none";
+
+            if((tagged.length > 0 || search__tags.length > 0)&& searched.length === 0 && inputLength < 3){
+                //display only tagged
+                if(element.classList.contains("tagged")){
+                    element.style.display = "";
+                    recipeFound++;
+                }
+            }
+            else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 2){
+                if(element.classList.contains("searched") && search__tags.length === 0)
+                {                 
+                    element.style.display = "";
+                    recipeFound++;
+                }     
+            }
+            else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 2){
+                if(element.classList.contains("tagged") && element.classList.contains("searched"))
+                {
+                    element.style.display = "";
+                    recipeFound++;
+                }
+            }
+            else{
+                if(inputLength <3)
+                {
+                    element.style.display = "";
+                    recipeFound++;
+                }
+            }
+        });
+
+        
+        if(recipeFound > 0){
+            $noRecipeWrapper.style.display = "none";
+        }
+    
     }
 
     addEventOnTagsSearch(){
@@ -157,38 +217,6 @@ class App {
             });
         });
     }
-    hideNotSearched(){
-        var tagged = document.querySelectorAll(".tagged");
-        var searched = document.querySelectorAll(".searched");
-        var search__tags = document.querySelectorAll(".search__tags--element");
-        var inputLength = document.querySelector(".search__module--input").value.length ;
-
-        document.querySelectorAll(".recipe").forEach((element)=>{
-            element.style.display = "none";
-
-            if(tagged.length > 0 && searched.length === 0 && inputLength === 0){
-                //display only tagged
-                if(element.classList.contains("tagged"))
-                    element.style.display = "";
-            }
-            else if(tagged.length === 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 0){
-                if(element.classList.contains("searched") && search__tags.length === 0)
-                    element.style.display = "";
-            }
-            else if(tagged.length > 0 && (searched.length > 0 || search__tags.length > 0) && inputLength > 0){
-                if(element.classList.contains("tagged") && element.classList.contains("searched"))
-                    element.style.display = "";
-            }
-            else{
-                if(inputLength === 0)
-                    element.style.display = "";
-            }
-
-        });
-    
-    }
-
-
 
     
     removeMaximizedClass(){

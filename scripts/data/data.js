@@ -383,7 +383,7 @@ const recipesData = [
 			  "unit": "tranches"
 		   }, 
 		   {
-			  "ingredient": "Pommes",
+			  "ingredient": "Pomme",
 			  "quantity": 1
 		   },
 		   {
@@ -411,7 +411,7 @@ const recipesData = [
 			  "unit": "grammes"
 		   },
 		   {
-			  "ingredient": "Pommes",
+			  "ingredient": "Pomme",
 			  "quantity": 8
 		   },
 		   {
